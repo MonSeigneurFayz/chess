@@ -89,9 +89,9 @@ public class winBoard extends JFrame {
         panneauCoordonnees.setOpaque(false);
         panneauCoordonnees.setBounds(5, 0, 800, 800);
         
-        JPanel panneauArmée = new JPanel(null); 
-        panneauArmée.setOpaque(false);
-        panneauArmée.setBounds(5, 0, 800, 800);
+        JPanel panneauArmÃ©e = new JPanel(null); 
+        panneauArmÃ©e.setOpaque(false);
+        panneauArmÃ©e.setBounds(5, 0, 800, 800);
         
         String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H"};
         
@@ -110,36 +110,36 @@ public class winBoard extends JFrame {
 				    tile.setBackground(Color.WHITE);
 				}
 				
-				// Action : désélectionner si clic sur une case vide
+				// Action : dÃ©sÃ©lectionner si clic sur une case vide
 				tile.addActionListener(new ActionListener() {
 				    public void actionPerformed(ActionEvent e) {
 				        if (selectedPiece != null) {
-				            // Enlever l'effet visuel de sélection
+				            // Enlever l'effet visuel de sÃ©lection
 				            selectedPiece.setBorderPainted(false);
 				            selectedPiece.setContentAreaFilled(false);
 				            selectedPiece.setBackground(null);
 				            selectedPiece = null;
 				        }
 
-				        // Supprimer les cases de déplacement et capture
-				        Component[] components = panneauArmée.getComponents();
+				        // Supprimer les cases de dÃ©placement et capture
+				        Component[] components = panneauArmÃ©e.getComponents();
 				        for (int i = components.length - 1; i >= 0; i--) {
 				            if (components[i] instanceof Choice) {
-				                panneauArmée.remove(components[i]);
+				                panneauArmÃ©e.remove(components[i]);
 				            }
 				        }
 
-				        // Réinitialiser les références
+				        // RÃ©initialiser les rÃ©fÃ©rences
 				        selectedPieceChoice = null;
 				        selectedPieceChoice2 = null;
 				        captureChoice = null;
 
-				        panneauArmée.repaint();
+				        panneauArmÃ©e.repaint();
 				    }
 				});
 
 
-				initialize (i,j,panneauArmée);
+				initialize (i,j,panneauArmÃ©e);
                                 
 				panneau.add(tile);
 			}
@@ -172,18 +172,18 @@ public class winBoard extends JFrame {
 		
 		layeredPanneau.add(panneau, JLayeredPane.DEFAULT_LAYER);
 		layeredPanneau.add(panneauCoordonnees, JLayeredPane.PALETTE_LAYER);
-		layeredPanneau.add(panneauArmée, JLayeredPane.DRAG_LAYER);
+		layeredPanneau.add(panneauArmÃ©e, JLayeredPane.DRAG_LAYER);
 		
 		
 		
-		// Si Menu.joueur n'est pas défini (null ou vide), on essaie de récupérer celui sauvegardé précédemment :
+		// Si Menu.joueur n'est pas dÃ©fini (null ou vide), on essaie de rÃ©cupÃ©rer celui sauvegardÃ© prÃ©cÃ©demment :
 		if (joueur == null || joueur.isEmpty()) {
-		    joueur = prefs.get("joueur", "Invité");
+		    joueur = prefs.get("joueur", "InvitÃ©");
 		}
 		
-		// Si Menu.opponent n'est pas défini (null ou vide), on essaie de récupérer celui sauvegardé précédemment :
+		// Si Menu.opponent n'est pas dÃ©fini (null ou vide), on essaie de rÃ©cupÃ©rer celui sauvegardÃ© prÃ©cÃ©demment :
 		if (opponent == null || opponent.isEmpty()) {
-			opponent = prefs.get("opponent", "Invité");
+			opponent = prefs.get("opponent", "InvitÃ©");
 		}
 		
 		if (opponent != null && !Menu2.trainingMode) {
@@ -320,16 +320,16 @@ public class winBoard extends JFrame {
 			
 			recommencer.addActionListener(new ActionListener () {
 				public void actionPerformed(ActionEvent e) {
-					panneauArmée.removeAll();
+					panneauArmÃ©e.removeAll();
 	            	joueur1Score = 0;
 	            	joueur2Score = 0;
 	            	updateScoreLabels();
 	            	Board board = new Board();
 	            	gameState = new GameState();
-	            	panneauArmée.repaint();
+	            	panneauArmÃ©e.repaint();
 	            	for (int i=board.getCol() ; i>=1;i--) {
 	        			for (int j=1 ; j<=board.getRow();j++) {
-	        				initialize(i,j,panneauArmée);
+	        				initialize(i,j,panneauArmÃ©e);
 	        			}
 	            	}
 				}
@@ -360,10 +360,10 @@ public class winBoard extends JFrame {
 		
 				            // Appliquer le coup sur le plateau
 				            SwingUtilities.invokeLater(() -> {
-				                applyMoveToBoard(opponentMove, panneauArmée);
+				                applyMoveToBoard(opponentMove, panneauArmÃ©e);
 				                gameState.switchTurn(); 
-				                selectedActivation(panneauArmée); 
-				                addLegalMoves(panneauArmée); 
+				                selectedActivation(panneauArmÃ©e); 
+				                addLegalMoves(panneauArmÃ©e); 
 				            });
 				        } 
 					} catch (IOException e1) {
@@ -399,7 +399,7 @@ public class winBoard extends JFrame {
 
 	    pawn.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            // Désélectionner l'ancien pion
+	            // DÃ©sÃ©lectionner l'ancien pion
 	            if (selectedPiece != null && selectedPiece != pawn) {
 	                selectedPiece.setBorderPainted(false);
 	                selectedPiece.setContentAreaFilled(false);
@@ -408,7 +408,7 @@ public class winBoard extends JFrame {
 	                clearSelections(panneau);
 	            }
 
-	            // Désélectionner si on reclique dessus
+	            // DÃ©sÃ©lectionner si on reclique dessus
 	            if (selectedPiece == pawn) {
 	                selectedPiece.setBorderPainted(false);
 	                selectedPiece.setContentAreaFilled(false);
@@ -439,7 +439,7 @@ public class winBoard extends JFrame {
 	                captureChoice = null;
 
 	                if (!pawn.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -887,7 +887,7 @@ public class winBoard extends JFrame {
             }
         }
         
-     // Créer Choice 1 seulement si la case devant est libre
+     // CrÃ©er Choice 1 seulement si la case devant est libre
         if (!isNextRow1Occupied) {
         	final int targetRow1 = nextRow1;
         	final int targetRow2 = nextRow2;
@@ -939,7 +939,7 @@ public class winBoard extends JFrame {
     	                }
     	            });
         		}
-	            // Créer Choice 2 si le pion n’a pas encore bougé et la case 2 en avant est libre
+	            // CrÃ©er Choice 2 si le pion nÂ’a pas encore bougÃ© et la case 2 en avant est libre
         		else if (!willKingBeInCheck(pawn, nextRow2, currentCol, panneau)) {	
         			if (!pawn.hasMoved() && !isNextRow2Occupied) {
             	
@@ -1034,7 +1034,7 @@ public class winBoard extends JFrame {
 	                }
 	            });
 	
-	            // Créer Choice 2 si le pion n’a pas encore bougé et la case 2 en avant est libre
+	            // CrÃ©er Choice 2 si le pion nÂ’a pas encore bougÃ© et la case 2 en avant est libre
 	            if (!pawn.hasMoved() && !isNextRow2Occupied) {
             		selectedPieceChoice2 = new Choice();
 	                selectedPieceChoice2.setBounds(currentCol * 100, nextRow2 * 100, 100, 100);
@@ -1093,7 +1093,7 @@ public class winBoard extends JFrame {
 	        	String[] choixPromotion = {"Reine", "Tour", "Fou", "Cavalier"};
 	        	int choix = JOptionPane.showOptionDialog(
 	        		    null,
-	        		    "Choisissez une pièce pour la promotion :",
+	        		    "Choisissez une piÃ¨ce pour la promotion :",
 	        		    "Promotion du pion",
 	        		    JOptionPane.DEFAULT_OPTION,
 	        		    JOptionPane.PLAIN_MESSAGE,
@@ -1266,7 +1266,7 @@ public class winBoard extends JFrame {
 	            	addLegalMoves(panneau);
 					break;
 	            default:
-	                // Annulé ou fermé, mets Reine par défaut
+	                // AnnulÃ© ou fermÃ©, mets Reine par dÃ©faut
 	            	addQueen(pawnRow, pawnCol + 1, color, panneau);
 	            	if (pawn.getColor().equals("black")) {
 	            		String from = coordToNotation(pawnRow, pawnCol);
@@ -1316,7 +1316,7 @@ public class winBoard extends JFrame {
 	        	String[] choixPromotion = {"Reine", "Tour", "Fou", "Cavalier"};
 	        	int choix = JOptionPane.showOptionDialog(
 	        		    null,
-	        		    "Choisissez une pièce pour la promotion :",
+	        		    "Choisissez une piÃ¨ce pour la promotion :",
 	        		    "Promotion du pion",
 	        		    JOptionPane.DEFAULT_OPTION,
 	        		    JOptionPane.PLAIN_MESSAGE,
@@ -1383,7 +1383,7 @@ public class winBoard extends JFrame {
 	            	addLegalMoves(panneau);
 					break;
 	            default:
-	                // Annulé ou fermé, mets Reine par défaut
+	                // AnnulÃ© ou fermÃ©, mets Reine par dÃ©faut
 	            	addQueen(pawnRow, pawnCol + 1, color, panneau);
 	            	if (pawn.getColor().equals("black")) {
 						joueur2Score += 8;
@@ -1419,7 +1419,7 @@ public class winBoard extends JFrame {
 	        selectedPiece = null;
 	    }
 
-	    // Supprime tous les Choice (déplacement ou capture)
+	    // Supprime tous les Choice (dÃ©placement ou capture)
 	    for (Component comp : panneau.getComponents()) {
 	        if (comp instanceof Choice) {
 	            panneau.remove(comp);
@@ -1458,7 +1458,7 @@ public class winBoard extends JFrame {
 	                bishop.setBackground(Color.CYAN);
 	                
 	                if (!bishop.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -1523,7 +1523,7 @@ public class winBoard extends JFrame {
 	    			knight.setBackground(Color.CYAN);
 	    			
 	    			if (!knight.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -1598,7 +1598,7 @@ public class winBoard extends JFrame {
 	    			rook.setBackground(Color.CYAN);
 	    			
 	    			if (!rook.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -1662,7 +1662,7 @@ public class winBoard extends JFrame {
 	    			queen.setBackground(Color.CYAN);
 	    			
 	    			if (!queen.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -1731,7 +1731,7 @@ public class winBoard extends JFrame {
 	    			king.setBackground(Color.CYAN);
 	    			
 	    			if (!king.getColor().equals(gameState.getCurrentPlayerColor())) {
-	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les déplacements.
+	                    // Si ce n'est pas au tour de cette couleur, on ne montre pas les dÃ©placements.
 	                	selectedPieceChoice = null;
                         selectedPieceChoice2 = null;
                         captureChoice = null;
@@ -2142,7 +2142,7 @@ public class winBoard extends JFrame {
 	        		int rCol = r.x / 100;
 	        		
 	        		Rook rook = (Rook) c;
-	        		//Vérifier que le roi et la tour sont de la même couleur, qu'ils n'ont pas bougés et qu'ils sont sur la même ligne
+	        		//VÃ©rifier que le roi et la tour sont de la mÃªme couleur, qu'ils n'ont pas bougÃ©s et qu'ils sont sur la mÃªme ligne
 	        		if(rRow == kingRow[0] && !rook.hasMoved() && !king.hasMoved() && rook.getColor().equals(king.getColor())) {
 	        			//Petit Roque
 	        			if (rCol == 7) {
@@ -2305,7 +2305,7 @@ public class winBoard extends JFrame {
 	    int kingCol = -1;
 	    King targetKing = null;
 
-	    // 1. Trouver le roi de la couleur donnée
+	    // 1. Trouver le roi de la couleur donnÃ©e
 	    for (Component c : panneau.getComponents()) {
 	        if (c instanceof King) {
 	            King k = (King) c;
@@ -2321,7 +2321,7 @@ public class winBoard extends JFrame {
 
 	    if (targetKing == null) return false;
 	    
-	    // 2. Parcourir les pièces adverses et vérifier si elles peuvent atteindre le roi
+	    // 2. Parcourir les piÃ¨ces adverses et vÃ©rifier si elles peuvent atteindre le roi
 	    for (Component c : panneau.getComponents()) {
 	        if (c instanceof ColoredPiece) {
 	        	
@@ -2338,21 +2338,21 @@ public class winBoard extends JFrame {
 	    }
 
 	    targetKing.setContentAreaFilled(false);
-	    return false; // Aucun danger détecté
+	    return false; // Aucun danger dÃ©tectÃ©
 	}
-	//Verifie que les déplacements de la piece (allié) met son roi en echec
+	//Verifie que les dÃ©placements de la piece (alliÃ©) met son roi en echec
 	public boolean willKingBeInCheck(ColoredPiece piece, int nextRow, int nextCol, JPanel panneau) {
 		int oldX = piece.getBounds().x;
 	    int oldY = piece.getBounds().y;
 	    Component capturedPiece = null;
 	    
-	    // Vérifie s'il y a une pièce adverse sur la case cible
+	    // VÃ©rifie s'il y a une piÃ¨ce adverse sur la case cible
 	    for (Component c : panneau.getComponents()) {
 	        if (c.getBounds().x == nextCol * 100 && c.getBounds().y == nextRow * 100 && c instanceof ColoredPiece) {
 	            ColoredPiece other = (ColoredPiece) c;
 	            if (!other.getColor().equals(piece.getColor())) {
 	                capturedPiece = c;
-	                panneau.remove(c); // On "capture" la pièce
+	                panneau.remove(c); // On "capture" la piÃ¨ce
 	                break;
 	            }
 	        }
@@ -2360,21 +2360,21 @@ public class winBoard extends JFrame {
 	    
 	    
 
-	    // Déplace temporairement la pièce
+	    // DÃ©place temporairement la piÃ¨ce
 	    piece.setBounds(nextCol * 100, nextRow * 100, 100, 100);
 	    panneau.revalidate();
 	    panneau.repaint();
 
-	    // Pause pour forcer Swing à appliquer les changements (important en debug)
+	    // Pause pour forcer Swing Ã  appliquer les changements (important en debug)
 	    Toolkit.getDefaultToolkit().sync(); // synchrone pour forcer le rendu
 
-	    // Vérifie si le roi est en échec
+	    // VÃ©rifie si le roi est en Ã©chec
 	    boolean exposesKing = isKingInCheck(piece.getColor(), panneau);
 
-	    // On remet la pièce à sa position initiale
+	    // On remet la piÃ¨ce Ã  sa position initiale
 	    piece.setBounds(oldX, oldY, 100, 100);
 
-	    // On restaure la pièce capturée si besoin
+	    // On restaure la piÃ¨ce capturÃ©e si besoin
 	    if (capturedPiece != null) {
 	        panneau.add(capturedPiece);
 	    }
@@ -2385,7 +2385,7 @@ public class winBoard extends JFrame {
 	    return exposesKing;
 	}
 	
-	//Verifie que la piece (attaquant) peut atteindre les coordonées du roi
+	//Verifie que la piece (attaquant) peut atteindre les coordonÃ©es du roi
 	public boolean canKingBeReached(ColoredPiece piece, int kingRow, int kingCol, JPanel panneau, String color) {
 			Rectangle r = piece.getBounds();
 			int pieceRow = r.y / 100;
@@ -2416,12 +2416,12 @@ public class winBoard extends JFrame {
             	        nextRow += dir[0];
             	        nextCol += dir[1];
 
-            	        // Vérifie si on reste dans le plateau
+            	        // VÃ©rifie si on reste dans le plateau
             	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
             	            break;
             	        }
             	        
-            	        // Vérifie s'il y a une pièce qui bloque le chemin
+            	        // VÃ©rifie s'il y a une piÃ¨ce qui bloque le chemin
             	        boolean isBlocked = false;
             	        for (Component c : panneau.getComponents()) {
             	            Rectangle otherR = c.getBounds();
@@ -2429,7 +2429,7 @@ public class winBoard extends JFrame {
             	            int cCol = otherR.x / 100;
 
             	            if (cRow == nextRow && cCol == nextCol) {
-            	                // Si c’est le roi ciblé, retour true
+            	                // Si cÂ’est le roi ciblÃ©, retour true
             	                if (cRow == kingRow && cCol == kingCol && c instanceof King && !((ColoredPiece)c).getColor().equals(piece.getColor())) {
             	                    return true;
             	                } else {
@@ -2480,12 +2480,12 @@ public class winBoard extends JFrame {
 		    	        nextRow += dir[0];
 		    	        nextCol += dir[1];
 
-		    	        // Vérifie si on reste dans le plateau
+		    	        // VÃ©rifie si on reste dans le plateau
 		    	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		    	            break;
 		    	        }
 		    	        
-		    	     // Vérifie s'il y a une pièce qui bloque le chemin
+		    	     // VÃ©rifie s'il y a une piÃ¨ce qui bloque le chemin
 		    	        boolean isBlocked = false;
 		    	        for (Component c : panneau.getComponents()) {
 		    	            Rectangle otherR = c.getBounds();
@@ -2493,7 +2493,7 @@ public class winBoard extends JFrame {
 		    	            int cCol = otherR.x / 100;
 
 		    	            if (cRow == nextRow && cCol == nextCol) {
-		    	                // Si c’est le roi ciblé, retour true
+		    	                // Si cÂ’est le roi ciblÃ©, retour true
 		    	                if (cRow == kingRow && cCol == kingCol && c instanceof King && !((ColoredPiece)c).getColor().equals(piece.getColor())) {
 		    	                    return true;
 		    	                } else {
@@ -2529,12 +2529,12 @@ public class winBoard extends JFrame {
 		    	        nextRow += dir[0];
 		    	        nextCol += dir[1];
 
-		    	        // Vérifie si on reste dans le plateau
+		    	        // VÃ©rifie si on reste dans le plateau
 		    	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		    	            break;
 		    	        }
 		    	        
-		    	     // Vérifie s'il y a une pièce qui bloque le chemin
+		    	     // VÃ©rifie s'il y a une piÃ¨ce qui bloque le chemin
 		    	        boolean isBlocked = false;
 		    	        for (Component c : panneau.getComponents()) {
 		    	            Rectangle otherR = c.getBounds();
@@ -2542,7 +2542,7 @@ public class winBoard extends JFrame {
 		    	            int cCol = otherR.x / 100;
 
 		    	            if (cRow == nextRow && cCol == nextCol) {
-		    	                // Si c’est le roi ciblé, retour true
+		    	                // Si cÂ’est le roi ciblÃ©, retour true
 		    	                if (cRow == kingRow && cCol == kingCol && c instanceof King && !((ColoredPiece)c).getColor().equals(piece.getColor())) {
 		    	                    return true;
 		    	                } else {
@@ -2565,35 +2565,35 @@ public class winBoard extends JFrame {
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	//Vérifie si les déplacements d'une piece alliée sont sur la trajectoire d'un echec
+	//VÃ©rifie si les dÃ©placements d'une piece alliÃ©e sont sur la trajectoire d'un echec
 	public boolean willPieceBeInTrajectory(ColoredPiece piece, int nextRow, int nextCol, JPanel panneau) {
 	    int oldX = piece.getBounds().x;
 	    int oldY = piece.getBounds().y;
 	    Component capturedPiece= null;
 
-	 // Vérifie s'il y a une pièce adverse sur la case cible
+	 // VÃ©rifie s'il y a une piÃ¨ce adverse sur la case cible
 	    for (Component c : panneau.getComponents()) {
 	        if (c.getBounds().x == nextCol * 100 && c.getBounds().y == nextRow * 100 && c instanceof ColoredPiece) {
 	            ColoredPiece other = (ColoredPiece) c;
 	            if (!other.getColor().equals(piece.getColor())) {
 	                capturedPiece = c;
-	                panneau.remove(c); // On "capture" la pièce
+	                panneau.remove(c); // On "capture" la piÃ¨ce
 	                break;
 	            }
 	        }
 	    }
 	    
-	    // Déplacement temporaire de la pièce
+	    // DÃ©placement temporaire de la piÃ¨ce
 	    piece.setBounds(nextCol * 100, nextRow * 100, 100, 100);
 
-	    // Vérifie s’il existe une pièce adverse menaçante pour le roi,
-	    // et si cette pièce alliée se trouve sur sa trajectoire
+	    // VÃ©rifie sÂ’il existe une piÃ¨ce adverse menaÃ§ante pour le roi,
+	    // et si cette piÃ¨ce alliÃ©e se trouve sur sa trajectoire
 	    boolean isBlocking = isPieceInTrajectory(piece, panneau);
 
-	    // Restaure la position de la pièce
+	    // Restaure la position de la piÃ¨ce
 	    piece.setBounds(oldX, oldY, 100, 100);
 	    
-	    // On restaure la pièce capturée si besoin
+	    // On restaure la piÃ¨ce capturÃ©e si besoin
 	    if (capturedPiece != null) {
 	        panneau.add(capturedPiece);
 	    }
@@ -2601,7 +2601,7 @@ public class winBoard extends JFrame {
 	    return isBlocking;
 	}
 
-	//Vérifie si une piece alliée est sur la trajectoire d'un echec
+	//VÃ©rifie si une piece alliÃ©e est sur la trajectoire d'un echec
 	public boolean isPieceInTrajectory(ColoredPiece allyPiece, JPanel panneau) {
 	    Rectangle allyRect = allyPiece.getBounds();
 	    int allyRow = allyRect.y / 100;
@@ -2610,7 +2610,7 @@ public class winBoard extends JFrame {
 	    ColoredPiece attacker;
 	    King king = null;
 
-	    // Trouver le roi allié
+	    // Trouver le roi alliÃ©
 	    for (Component c : panneau.getComponents()) {
 	        if (c instanceof King && ((ColoredPiece) c).getColor().equals(allyPiece.getColor())) {
 	            king = (King) c;
@@ -2623,22 +2623,22 @@ public class winBoard extends JFrame {
 	    int kingRow = kingRect.y / 100;
 	    int kingCol = kingRect.x / 100;
 
-	    // Parcourt toutes les pièces adverses
+	    // Parcourt toutes les piÃ¨ces adverses
 	    for (Component c : panneau.getComponents()) {
 	        if (!(c instanceof ColoredPiece)) continue;
 
 	        ColoredPiece p = (ColoredPiece) c;
-	        if (p.getColor().equals(allyPiece.getColor())) continue; // On veut les pièces adverses
+	        if (p.getColor().equals(allyPiece.getColor())) continue; // On veut les piÃ¨ces adverses
 
 	        Rectangle r = p.getBounds();
 	        int row = r.y / 100;
 	        int col = r.x / 100;
 
-	        // Vérifie si cette pièce menace le roi
+	        // VÃ©rifie si cette piÃ¨ce menace le roi
 	        if (isThreateningKing(p, row, col, kingRow, kingCol, panneau)) {
-	            // Vérifie si allyPiece est alignée avec l'attaquant et le roi
+	            // VÃ©rifie si allyPiece est alignÃ©e avec l'attaquant et le roi
 	            if (areAligned(row, col, kingRow, kingCol, allyRow, allyCol)) {
-	                // Vérifie si allyPiece est entre l'attaquant et le roi
+	                // VÃ©rifie si allyPiece est entre l'attaquant et le roi
 	                if (isBetween(row, col, kingRow, kingCol, allyRow, allyCol)) {
 	                    return true;
 	                }
@@ -2677,7 +2677,7 @@ public class winBoard extends JFrame {
 	                if (comp instanceof King && ((ColoredPiece) comp).getColor() != piece.getColor()) {
 	                    return true; // attaque le roi
 	                } else {
-	                    break; // bloqué par une autre pièce
+	                    break; // bloquÃ© par une autre piÃ¨ce
 	                }
 	            }
 	        }
@@ -2697,11 +2697,11 @@ public class winBoard extends JFrame {
 
 	
 	private boolean areAligned(int r1, int c1, int r2, int c2, int r3, int c3) {
-	    // même ligne
+	    // mÃªme ligne
 	    if (r1 == r2 && r2 == r3) return true;
-	    // même colonne
+	    // mÃªme colonne
 	    if (c1 == c2 && c2 == c3) return true;
-	    // même diagonale
+	    // mÃªme diagonale
 	    if (Math.abs(r1 - r2) == Math.abs(c1 - c2) &&
 	        Math.abs(r2 - r3) == Math.abs(c2 - c3) &&
 	        ((r1 - r2) * (r2 - r3) >= 0) && ((c1 - c2) * (c2 - c3) >= 0)) {
@@ -2711,7 +2711,7 @@ public class winBoard extends JFrame {
 	}
 
 	private boolean isBetween(int r1, int c1, int r2, int c2, int r, int c) {
-	    // Vérifie si (r,c) est entre (r1,c1) et (r2,c2)
+	    // VÃ©rifie si (r,c) est entre (r1,c1) et (r2,c2)
 	    return ((r >= Math.min(r1, r2) && r <= Math.max(r1, r2)) &&
 	            (c >= Math.min(c1, c2) && c <= Math.max(c1, c2)));
 	}
@@ -2720,14 +2720,14 @@ public class winBoard extends JFrame {
 	
 	
 	public void updateScoreLabels() {
-		// Si Menu.joueur n'est pas défini (null ou vide), on essaie de récupérer celui sauvegardé précédemment :
+		// Si Menu.joueur n'est pas dÃ©fini (null ou vide), on essaie de rÃ©cupÃ©rer celui sauvegardÃ© prÃ©cÃ©demment :
 		if (joueur == null || joueur.isEmpty()) {
-		    joueur = prefs.get("joueur", "Invité");
+		    joueur = prefs.get("joueur", "InvitÃ©");
 		}
 		
-		// Si Menu.opponent n'est pas défini (null ou vide), on essaie de récupérer celui sauvegardé précédemment :
+		// Si Menu.opponent n'est pas dÃ©fini (null ou vide), on essaie de rÃ©cupÃ©rer celui sauvegardÃ© prÃ©cÃ©demment :
 		if (opponent == null || opponent.isEmpty()) {
-			opponent = prefs.get("opponent", "Invité");
+			opponent = prefs.get("opponent", "InvitÃ©");
 		}
 		
 		if (opponent != null && !Menu2.trainingMode) {
@@ -2883,7 +2883,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -2932,7 +2932,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -2984,7 +2984,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -3035,7 +3035,7 @@ public class winBoard extends JFrame {
 	        	        nextRow += dir[0];
 	        	        nextCol += dir[1];
 
-	        	        // Vérifie si on reste dans le plateau
+	        	        // VÃ©rifie si on reste dans le plateau
 	        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 	        	            continue;
 	        	        }
@@ -3160,7 +3160,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -3209,7 +3209,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -3261,7 +3261,7 @@ public class winBoard extends JFrame {
 		        	        nextRow += dir[0];
 		        	        nextCol += dir[1];
 
-		        	        // Vérifie si on reste dans le plateau
+		        	        // VÃ©rifie si on reste dans le plateau
 		        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 		        	            break;
 		        	        }
@@ -3312,7 +3312,7 @@ public class winBoard extends JFrame {
 	        	        nextRow += dir[0];
 	        	        nextCol += dir[1];
 
-	        	        // Vérifie si on reste dans le plateau
+	        	        // VÃ©rifie si on reste dans le plateau
 	        	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
 	        	            continue;
 	        	        }
@@ -3353,7 +3353,7 @@ public class winBoard extends JFrame {
 		    String[] choixFinDuJeu = {"Menu", "Rejouer"};
         	int choix = JOptionPane.showOptionDialog(
         		    null,
-        		    "Les "+ color + " ont gagné",
+        		    "Les "+ color + " ont gagnÃ©",
         		    "echec et mat!",
         		    JOptionPane.DEFAULT_OPTION,
         		    JOptionPane.PLAIN_MESSAGE,
@@ -3407,7 +3407,7 @@ public class winBoard extends JFrame {
     	        nextRow += dir[0];
     	        nextCol += dir[1];
 
-    	        // Vérifie si on reste dans le plateau
+    	        // VÃ©rifie si on reste dans le plateau
     	        if (nextRow < 0 || nextRow >= 8 || nextCol < 0 || nextCol >= 8) {
     	            break;
     	        }
@@ -3782,7 +3782,7 @@ public class winBoard extends JFrame {
     	    	        }
     	            	
     	            	if (!isLongOccupied) {
-    		            	// Ajoute un déplacement vide
+    		            	// Ajoute un dÃ©placement vide
     	        	        selectedPieceChoice = new Choice();
     	        	        selectedPieceChoice.setBounds(moves[1] * 100, moves[0] * 100, 100, 100);
     		                selectedPieceChoice.setBorderPainted(false);
@@ -4192,7 +4192,7 @@ public class winBoard extends JFrame {
     		        }
     	    		
     	    		if (!isLongOccupied) {
-    		        	// Ajoute un déplacement vide
+    		        	// Ajoute un dÃ©placement vide
     	    	        selectedPieceChoice = new Choice();
     	    	        selectedPieceChoice.setBounds(targetCol * 100, targetRow * 100, 100, 100);
     	                selectedPieceChoice.setBorderPainted(false);
@@ -4597,13 +4597,13 @@ public class winBoard extends JFrame {
         }
 	}
 	
-	private void initialize (int i, int j, JPanel panneauArmée) {
+	private void initialize (int i, int j, JPanel panneauArmÃ©e) {
 		if (Menu2.color == "white") {
 			// ajout des pions
 	        if (i==6) {
 	        	final int ligne = i;
 	            final int colonne = j;
-	            addPawn(ligne, colonne, "white", panneauArmée);                 
+	            addPawn(ligne, colonne, "white", panneauArmÃ©e);                 
 	            
 	        }
 	        
@@ -4611,7 +4611,7 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addPawn(ligne, colonne, "black", panneauArmée);
+	            addPawn(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des fous
@@ -4619,28 +4619,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "white", panneauArmée);
+	            addBishop(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 6) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "white", panneauArmée);
+	            addBishop(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 3) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "black", panneauArmée);
+	            addBishop(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 6) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "black", panneauArmée);
+	            addBishop(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des cavaliers
@@ -4648,28 +4648,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "white", panneauArmée);
+	            addKnight(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 7) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "white", panneauArmée);
+	            addKnight(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 2) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "black", panneauArmée);
+	            addKnight(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 7) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "black", panneauArmée);
+	            addKnight(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des tours
@@ -4677,28 +4677,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "white", panneauArmée);
+	            addRook(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 8) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "white", panneauArmée);
+	            addRook(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 1) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "black", panneauArmée);
+	            addRook(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 8) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "black", panneauArmée);
+	            addRook(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	     // ajout des reines
@@ -4706,14 +4706,14 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addQueen(ligne, colonne, "white", panneauArmée);
+	            addQueen(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	                        
 	        if (i==1 && j == 4) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addQueen(ligne, colonne, "black", panneauArmée);
+	            addQueen(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	     // ajout des rois
@@ -4721,14 +4721,14 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKing(ligne, colonne, "white", panneauArmée);
+	            addKing(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	                        
 	        if (i==1 && j == 5) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKing(ligne, colonne, "black", panneauArmée);
+	            addKing(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 		} 
 		else if (Menu2.color == "black") {
@@ -4736,7 +4736,7 @@ public class winBoard extends JFrame {
 	        if (i==1) {
 	        	final int ligne = i;
 	            final int colonne = j;
-	            addPawn(ligne, colonne, "white", panneauArmée);                 
+	            addPawn(ligne, colonne, "white", panneauArmÃ©e);                 
 	            
 	        }
 	        
@@ -4744,7 +4744,7 @@ public class winBoard extends JFrame {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addPawn(ligne, colonne, "black", panneauArmée);
+	            addPawn(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des fous
@@ -4752,28 +4752,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "white", panneauArmée);
+	            addBishop(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 6) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "white", panneauArmée);
+	            addBishop(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 3) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "black", panneauArmée);
+	            addBishop(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 6) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addBishop(ligne, colonne, "black", panneauArmée);
+	            addBishop(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des cavaliers
@@ -4781,28 +4781,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "white", panneauArmée);
+	            addKnight(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 7) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "white", panneauArmée);
+	            addKnight(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 2) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "black", panneauArmée);
+	            addKnight(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 7) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKnight(ligne, colonne, "black", panneauArmée);
+	            addKnight(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        // ajout des tours
@@ -4810,28 +4810,28 @@ public class winBoard extends JFrame {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "white", panneauArmée);
+	            addRook(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==1 && j == 8) {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "white", panneauArmée);
+	            addRook(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 1) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "black", panneauArmée);
+	            addRook(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	        if (i==7 && j == 8) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addRook(ligne, colonne, "black", panneauArmée);
+	            addRook(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	     // ajout des reines
@@ -4839,14 +4839,14 @@ public class winBoard extends JFrame {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addQueen(ligne, colonne, "white", panneauArmée);
+	            addQueen(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	                        
 	        if (i==7 && j == 4) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addQueen(ligne, colonne, "black", panneauArmée);
+	            addQueen(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 	        
 	     // ajout des rois
@@ -4854,14 +4854,14 @@ public class winBoard extends JFrame {
 	        	final int ligne = i-1;
 	            final int colonne = j;
 	
-	            addKing(ligne, colonne, "white", panneauArmée);
+	            addKing(ligne, colonne, "white", panneauArmÃ©e);
 	        }
 	                        
 	        if (i==7 && j == 5) {
 	        	final int ligne = i;
 	            final int colonne = j;
 	
-	            addKing(ligne, colonne, "black", panneauArmée);
+	            addKing(ligne, colonne, "black", panneauArmÃ©e);
 	        }
 		}
 	}
@@ -4999,7 +4999,7 @@ public class winBoard extends JFrame {
 	    	        }
 	    	    }
 
-	            // Si prise en passant, retire le pion capturé derrière
+	            // Si prise en passant, retire le pion capturÃ© derriÃ¨re
 	            if (isEnPassant && pieceType.equals("P")) {
 	                int capturedRow = pieceToMove.getColor().equals("white") ? toRow + 1 : toRow - 1;
 	                for (Component c : panneau.getComponents()) {
@@ -5015,7 +5015,7 @@ public class winBoard extends JFrame {
 	            }
 	        }
 
-	        // Déplacement de la pièce
+	        // DÃ©placement de la piÃ¨ce
 	        pieceToMove.setBounds(toCol * 100, toRow * 100, 100, 100);
 	        panneau.repaint();
 
@@ -5080,7 +5080,7 @@ public class winBoard extends JFrame {
 	}
 	
 	public static void sendMove(String gameId, String move, String player) throws IOException {
-	    URL url = new URL("http://localhost:8080/moves"); // Remplace par l'URL Render plus tard
+	    URL url = new URL("http://localhost:8080/moves"); //mettre l'url render quand ca voudra bien fonctionner
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("POST");
 	    conn.setRequestProperty("Content-Type", "application/json");
@@ -5102,14 +5102,14 @@ public class winBoard extends JFrame {
 	}
 	
 	public static String getLastOpponentMove(String gameId, String player) throws IOException {
-	    URL url = new URL("http://localhost:8080/moves/" + gameId + "/last/" + player);
+	    URL url = new URL("http://localhost:8080/moves/" + gameId + "/last/" + player); //mettre l'url render quand ca voudra bien fonctionner
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.setRequestProperty("Accept", "application/json");
 
 	    int responseCode = conn.getResponseCode();
 	    if (responseCode != 200) {
-	        throw new IOException("Erreur lors de la récupération du coup : HTTP " + responseCode);
+	        throw new IOException("Erreur lors de la rÃ©cupÃ©ration du coup : HTTP " + responseCode);
 	    }
 
 	    try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
